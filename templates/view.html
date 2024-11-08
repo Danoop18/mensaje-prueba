@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Pruebas</title>
+    <style>
+        /* Estilos para las fichas */
+        .chip {
+            display: inline-block;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .chip.selected {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .cantidad {
+            display: none;
+            margin: 10px 0;
+        }
+
+        .cantidad.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Actualización de Pruebas</h1>
+
+    <form action="/update" method="POST">
+        <div id="chips-container">
+            <div class="chip" data-value="DUO">DUO</div>
+            <div class="chip" data-value="SQ">SQ</div>
+            <div class="chip" data-value="INFLUENZA">INFLUENZA</div>
+            <div class="chip" data-value="ABBOTT">ABBOTT</div>
+        </div>
+<script>
+        // Seleccionar fichas y manejar la selección
+        document.querySelectorAll('.chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                // Alternar selección de la ficha
+                this.classList.toggle('selected');
+
+                const prueba = this.getAttribute('data-value');
+                const cantidadDiv = document.getElementById(`cantidad_${prueba}`);
+
+                // Mostrar/ocultar campo de cantidad
+                if (this.classList.contains('selected')) {
+                    cantidadDiv.classList.add('visible');
+                } else {
+                    cantidadDiv.classList.remove('visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+<html>
+    <body>
+        <script>
+            // Seleccionar fichas y manejar la selección
+            document.querySelectorAll('.chip').forEach(chip => {
+                chip.addEventListener('click', function() {
+                    // Alternar selección de la ficha
+                    this.classList.toggle('selected');
+
+                    const prueba = this.getAttribute('data-value');
+                    const cantidadDiv = document.getElementById(`bitacora_${prueba}`);
+
+                    // Mostrar/ocultar campo de cantidad
+                    if (this.classList.contains('selected')) {
+                        cantidadDiv.classList.add('visible');
+                    } else {
+                        cantidadDiv.classList.remove('visible');
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Pruebas</title>
+    <style>
+        /* Estilos para las fichas */
+        .chip {
+            display: inline-block;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .chip.selected {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .cantidad {
+            display: none;
+            margin: 10px 0;
+        }
+        .cantidad.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Actualización de Pruebas</h1>
+
+    <form action="/update" method="POST">
+        <div id="chips-container">
+            <div class="chip" data-value="DUO">DUO</div>
+            <div class="chip" data-value="SQ">SQ</div>
+            <div class="chip" data-value="INFLU">INFLUENZA</div>
+            <div class="chip" data-value="ABBOTT">ABBOTT</div>
+        </div>
+
+        <div id="cantidad_DUO" class="cantidad">
+            <label for="cantidad_DUO_input">Cantidad DUO:</label>
+            <input type="number" id="cantidad_DUO_input" name="cantidad_DUO" min="0">
+        </div>
+
+        <div id="cantidad_SQ" class="cantidad">
+            <label for="cantidad_SQ_input">Cantidad SQ:</label>
+            <input type="number" id="cantidad_SQ_input" name="cantidad_SQ" min="0">
+        </div>
+
+        <div id="cantidad_INFLUENZA" class="cantidad">
+            <label for="cantidad_INFLUENZA_input">Cantidad INFLUENZA:</label>
+            <input type="number" id="cantidad_INFLUENZA_input" name="cantidad_INFLUENZA" min="0">
+        </div>
+
+        <div id="cantidad_ABBOTT" class="cantidad">
+            <label for="cantidad_ABBOTT_input">Cantidad ABBOTT:</label>
+            <input type="number" id="cantidad_ABBOTT_input" name="cantidad_ABBOTT" min="0">
+        </div>
+
+        <!-- Campo para el selector de tiempo -->
+        <div>
+            <label for="hora_envio">Hora de envío:</label>
+            <input type="time" id="hora_envio" name="hora_envio" required>
+        </div>
+
+        <!-- Campo oculto para pruebas seleccionadas -->
+        <input type="hidden" id="pruebas_seleccionadas" name="pruebas_seleccionadas" value="">
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        // Seleccionar fichas y manejar la selección
+        document.querySelectorAll('.chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                // Alternar selección de la ficha
+                this.classList.toggle('selected');
+
+                const prueba = this.getAttribute('data-value');
+                const cantidadDiv = document.getElementById(`cantidad_${prueba}`);
+                
+                // Mostrar/ocultar campo de cantidad
+                if (this.classList.contains('selected')) {
+                    cantidadDiv.classList.add('visible');
+                } else {
+                    cantidadDiv.classList.remove('visible');
+                }
+
+                // Actualizar el campo oculto de pruebas seleccionadas
+                updateSelectedPruebas();
+            });
+        });
+
+        function updateSelectedPruebas() {
+            const selectedChips = Array.from(document.querySelectorAll('.chip.selected'))
+                                        .map(chip => chip.getAttribute('data-value'));
+            document.getElementById('pruebas_seleccionadas').value = selectedChips.join(',');
+        }
+    </script>
+</body>
+</html>

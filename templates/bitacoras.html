@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitácora Duo</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bitácoras</h1>
+
+    <h2>Bitácora DUO</h2>
+    {{ bitacora_duo | safe }}
+
+    <h2>Bitácora SQ</h2>
+    {{ bitacora_sq | safe }}
+
+    <h2>Bitácora ABBOTT</h2>
+    {{ bitacora_abbott | safe }}
+
+    <a href="{{ url_for('index') }}">Volver a la página principal</a>
+</body>
+</html>
